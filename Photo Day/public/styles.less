@@ -1,0 +1,1008 @@
+@font-face {
+  font-family: PlayfairDisplay_Regular;
+  src: url('./../public/fonts/playfair-display/PlayfairDisplay-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: PlayfairDisplay_Bold;
+  src: url('./../public/fonts/playfair-display/PlayfairDisplay-Bold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: NotoSans_Regular;
+  src: url('./../public/fonts/notoSans/NotoSans-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: NotoSans_Bold;
+  src: url('./../public/fonts/notoSans/NotoSans-Bold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: NotoSerif_Regular;
+  src: url('./../public/fonts/notoserif/NotoSerif-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: NotoSerif_Bold;
+  src: url('./../public/fonts/notoserif/NotoSerif-Bold.ttf') format('truetype');
+}
+
+@main_header_font:PlayfairDisplay_Regular;
+@calendar_font:NotoSerif_Regular;
+@text_font:NotoSans_Regular;
+@text_font_bold:NotoSans_Bold;
+
+@text_color:#000000;
+@main_header_color:#010101;
+@light_teaser_font:#bebebe;
+@light_pages_font:#848484;
+@light_text_font:#acacac;
+@background_teaser:#fbf6e9;
+
+@image-pass_320:"./../public/img/layout_320/";
+@image-pass_480:"./../public/img/layout_480/";
+@image-pass_768:"./../public/img/layout_768/";
+
+.image(@image-pass, @image, @coordinates...){
+  background: url('@{image-pass}@{image}') @coordinates no-repeat ;
+}
+
+.image_numeric(@image-pass, @image, @margin-right, @margin-bottom, @order-number, @coordinates...){
+  background: url('@{image-pass}@{image}') @coordinates no-repeat ;
+  margin-right: @margin-right;
+  margin-bottom: @margin-bottom;
+  order:@order-number;
+}
+
+//@coefficient_for_img_320:0.652;
+//@prop:flex-basis;
+
+
+html{
+  box-sizing: border-box;
+}
+
+*{
+  margin: 0;
+  padding: 0;
+}
+.container{
+  margin: auto;
+
+}
+.header{
+  display: flex;
+
+    &__text{
+      text-transform: uppercase;
+      color: @main_header_color;
+      font-family: @main_header_font;
+      line-height: 1.2;
+      }
+    &__line{
+      border-bottom: 2px solid @main_header_color;
+      margin-bottom: 6px;
+      }
+}
+
+.main-photo{
+  display: flex;
+  justify-content: center;
+
+}
+
+.link{
+  text-decoration: none;
+  color: inherit;
+}
+
+.calendar-sheet{
+  color: @text_color;
+  background: #ffffff;
+  display: flex;
+
+  &__text{
+    font-family: @calendar_font;
+    color: @text_color;
+    text-align: center;
+  }
+  &__img-arrow{
+    .image(@image-pass_320, "arrow-r.png");
+    width: 3px;
+    height: 5px;
+    }
+
+}
+.calendar-sheet_21{
+   opacity: .8;
+  }
+
+.main-content {
+  display: flex;
+  flex-wrap: wrap;
+}
+.pages{
+  display: flex;
+  justify-content: flex-start;
+  color: @text_color;
+  font-family: @text_font;
+  font-size: 13px;
+
+  &__link{
+    width: 34px;
+    height: 34px;
+    line-height: 34px;
+    text-align: center;
+
+    &:last-child{
+      margin-left: 25px;
+    }
+
+    &:hover,
+    &:visited,
+    &:active {
+      text-decoration: none;
+      color: inherit;
+    }
+  }
+  .active-link{
+    font-weight: 700;
+    .image(@image-pass_320, "link-active_background.png");
+  }
+
+  .disabled-link{
+    pointer-events: none;
+    cursor: default;
+    color: @light_pages_font;
+  }
+
+
+
+}
+
+
+
+//RESPONSIVE
+
+
+@media (min-width: 320px)  and (max-width: 479px){
+  .container{
+    min-width: 320px;
+  }
+  .header{
+    margin: 25px 4px 15px 4px;
+
+    &__text{
+      font-size: 26px;
+      font-weight: 400;
+      padding-right: 20px;
+
+    }
+    &__line{
+      width: calc(100% - 53.8% - 28px);
+    }
+  }
+
+  .main-photo{
+
+    &-description{
+      display: none;
+    }
+    &__img{
+      .image(@image-pass_320, "Photo_main_320.png");
+
+      margin: 0 5px;
+      flex-basis: calc(100% - 10px);
+      padding-bottom: calc(63.125% - 12px - 53px);
+
+      //height: 202px;
+      background-size: cover;
+
+
+    }
+
+  }
+
+  .calendar-sheet{
+    width: calc((100% - 18px)/4);
+    height: 48px;
+    position: relative;
+    justify-content: center;
+
+
+    &__text{
+      font-size: 14px;
+      margin-top: 5px;
+      margin-left: 3px;
+      width: 63px;
+      height: 35px;
+      line-height: 1.2;
+
+
+      &-number{
+        font-size: 18px;
+
+      }
+    }
+    &__img-arrow{
+      position: absolute;
+      top:14px;
+      right: 8px;
+    }
+  }
+
+  .calendar-sheet_21{
+    width: 80px;
+    height: 53px;
+    margin: 6px;
+
+    &__text{
+      margin-top: 11px;
+      //margin-left: 9px;
+      line-height: 1.25;
+
+      &-number{
+        line-height: 0.8;
+      }
+    }
+  }
+
+  .calendar-sheet__img-arrow_display-none{
+    display: none;
+  }
+
+  .calendar-sheet_18,
+  .calendar-sheet_17{
+    display: none;
+  }
+
+  .calendar-sheet_20{
+    order:8;
+    margin-bottom: 6px;
+    margin-right: 6px;
+  }
+
+  .calendar-sheet_19{
+    order:14;
+    margin-bottom: 6px;
+    margin-right: 6px;
+  }
+
+  .teaser{
+    order: 7;
+    display: flex;
+    background: @background_teaser;
+    margin: 10px 0 10px 0;
+
+    &__img{
+      .image(@image-pass_320, "banner-bg.png", -7px, -50px);
+      flex-basis: 100px;
+      height: 80px;
+      margin-right: 19px;
+    }
+
+    &-content{
+      font-family: @text_font;
+      color: @text_color;
+      flex-basis: calc(100% - 129px);
+      margin-right: 16px;
+
+    }
+
+    &__header{
+      padding: 7px 0 7px 0;
+      font-size: 10px;
+      font-weight: 700;
+      line-height: 1;
+      color: @light_teaser_font;
+      letter-spacing: .05em;
+    }
+    &__main-header{
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1;
+      padding-bottom:3px;
+      letter-spacing: .05em;
+
+
+    }
+    &__text{
+      font-size: 12px;
+      padding-bottom: 9px;
+      line-height: 1.4;
+    }
+
+
+  }
+
+  .main-content{
+
+    margin: 5px;
+
+    .img{
+
+      flex-basis: calc((100% - 18px)/4);
+      //height: 48px;
+      padding-top: calc(((100% - 18px) / 4) * 0.6576);
+      //background-size: cover;
+
+    }
+
+    //.img1{
+    //  .image_numeric(@image-pass_320, "Sprite320.png", 6px, 6px, 1, 0%, 0%);
+    //}
+    //.img2{
+    //  .image_numeric(@image-pass_320, "Sprite320.png", 6px, 6px, 2, 33.33%, 0%);
+    //}
+    //.img3{
+    //  .image_numeric(@image-pass_320, "Sprite320.png", 6px, 6px, 3, -158px, 0);
+    //}
+    //.img4{
+    //  .image_numeric(@image-pass_320, "Sprite320.png", 0, 6px, 4, -237px, 0);
+    //}
+    //.img5{
+    //  .image_numeric(@image-pass_320, "Sprite320.png", 6px, 0, 5, 0, -54px);
+    //}
+    //.img6{
+    //  .image_numeric(@image-pass_320, "Sprite320.png", 6px, 0, 6, -79px, -54px);
+    //}
+    //.img7{
+    //  .image_numeric(@image-pass_320, "Sprite320.png", 6px, 6px, 9, -79px, -202px);
+    //}
+    //.img8{
+    //  .image_numeric(@image-pass_320, "Sprite320.png", 6px, 6px, 10, -158px, -202px);
+    //}
+    //.img9{
+    //  .image_numeric(@image-pass_320, "Sprite320.png", 0, 6px, 11, -237px, -202px);
+    //}
+    //.img10{
+    //  .image_numeric(@image-pass_320, "Sprite320.png", 6px, 6px, 12, 0, -256px);
+    //}
+    //.img11{
+    //  .image_numeric(@image-pass_320, "Sprite320.png", 6px, 6px, 13, -79px, -256px);
+    //}
+    //.img12{
+    //  .image_numeric(@image-pass_320, "Sprite320.png", 0, 6px, 15, -237px, -256px);
+    //}
+    //.img13{
+    //  .image_numeric(@image-pass_320, "Sprite320.png", 6px, 6px, 16, 0, -310px);
+    //}
+    //.img14{
+    //  .image_numeric(@image-pass_320, "Sprite320.png", 6px, 6px, 17, -79px, -310px);
+    //}
+    //.img15{
+    //  .image_numeric(@image-pass_320, "Sprite320.png", 6px, 6px, 18, -158px, -310px);
+    //}
+    //.img16{
+    //  .image_numeric(@image-pass_320, "Sprite320.png", 0px, 6px, 19, -237px, -310px);
+    //}
+    //.img17{
+    //  .image_numeric(@image-pass_320, "Sprite320.png", 6px, 0, 20, 0, -364px);
+    //}
+
+    .img1{
+      .image_numeric(@image-pass_320, "Sprite320.png", 6px, 6px, 1, 0%, 0%);
+    }
+    .img2{
+      .image_numeric(@image-pass_320, "Sprite320.png", 6px, 6px, 2, 33.33%, 0%);
+    }
+    .img3{
+      .image_numeric(@image-pass_320, "Sprite320.png", 6px, 6px, 3, 66.66%, 0%);
+    }
+    .img4{
+      .image_numeric(@image-pass_320, "Sprite320.png", 0, 6px, 4, 100%, 0%);
+    }
+    .img5{
+      .image_numeric(@image-pass_320, "Sprite320.png", 6px, 0, 5, 0%, 14.84%);
+    }
+    .img6{
+      .image_numeric(@image-pass_320, "Sprite320.png", 6px, 0, 6, 33.33%, 14.84%);
+    }
+    .img7{
+      .image_numeric(@image-pass_320, "Sprite320.png", 6px, 6px, 9, 33.33%, 55.49%);
+    }
+    .img8{
+      .image_numeric(@image-pass_320, "Sprite320.png", 6px, 6px, 10, 66.66%, 55.49%);
+    }
+    .img9{
+      .image_numeric(@image-pass_320, "Sprite320.png", 0, 6px, 11, 100%, 55.49%);
+    }
+    .img10{
+      .image_numeric(@image-pass_320, "Sprite320.png", 6px, 6px, 12, 0%, 70.33%);
+    }
+    .img11{
+      .image_numeric(@image-pass_320, "Sprite320.png", 6px, 6px, 13, 33.33%, 70.33%);
+    }
+    .img12{
+      .image_numeric(@image-pass_320, "Sprite320.png", 0, 6px, 15, 100%, 70.33%);
+    }
+    .img13{
+      .image_numeric(@image-pass_320, "Sprite320.png", 6px, 6px, 16, 0%, 85.16%);
+    }
+    .img14{
+      .image_numeric(@image-pass_320, "Sprite320.png", 6px, 6px, 17, 33.33%, 85.16%);
+    }
+    .img15{
+      .image_numeric(@image-pass_320, "Sprite320.png", 6px, 6px, 18, 66.66%, 85.16%);
+    }
+    .img16{
+      .image_numeric(@image-pass_320, "Sprite320.png", 0px, 6px, 19, 100%, 85.16%);
+    }
+    .img17{
+      .image_numeric(@image-pass_320, "Sprite320.png", 6px, 0, 20, 0%, 100%);
+    }
+
+    .img18,
+    .img19,
+    .img20,
+    .img21,
+    .img22,
+    .img23,
+    .img24{
+      display:none;
+    }
+    .img{
+      background-size: 424.658%, 858.333%;
+    }
+
+  }
+
+  .pages{
+    margin:  19px 0 21px 5px;
+
+    &__text{
+      display:none;
+    }
+
+  }
+
+}
+
+@media (min-width: 480px)  and (max-width: 767px){
+  .container{
+
+    min-width: 480px;
+  }
+  .header{
+    margin: 43px 20px 25px 19px;
+
+    &__text{
+      font-size: 40px;
+      font-weight: 400;
+      padding-right: 19px;
+
+    }
+    &__line{
+      width: calc(100% - 52.2% - 58px);
+
+    }
+  }
+
+  .main-photo{
+    &-description{
+      display: none;
+    }
+    &__img{
+      .image(@image-pass_480, "img_main_480.png");
+      //flex-basis: 440px;
+      flex-basis: calc(100% - 40px);
+      padding-bottom: calc((100% - 40px) * 0.65);
+      background-size: cover;
+      //height: 286px;
+    }
+  }
+
+  .calendar-sheet{
+    width: calc((100% - 40px)/5);
+    padding-bottom: calc((((100% - 40px)/5)*0.6625) - 35px - 6px);
+    //width: 80px;
+    //height: 53px;
+    position: relative;
+
+    &__text{
+      font-size: 14px;
+
+      margin-top: 6px;
+      margin-left: 9px;
+      width: 63px;
+      height: 35px;
+      line-height: 1.2;
+      &-number{
+        font-size: 18px;
+      }
+    }
+    &__img-arrow{
+      position: absolute;
+      top:15px;
+      right: 11px;
+    }
+  }
+
+  .calendar-sheet_21{
+    margin: 10px;
+    width: 80px;
+    height: 53px;
+    &__text{
+      margin-top: 11px;
+      margin-left: 9px;
+      line-height: 1.25;
+
+      &-number{
+        line-height: 0.8;
+
+      }
+    }
+  }
+
+  .calendar-sheet__img-arrow_display-none{
+    display: none;
+  }
+
+  .calendar-sheet_18{
+    order: 24;
+    margin-bottom: 10px;
+    margin-right: 10px;
+  }
+  .calendar-sheet_17{
+    order: 21;
+    margin-right: 10px;
+  }
+
+  .calendar-sheet_20{
+    order: 3;
+    margin-bottom: 10px;
+    margin-right: 10px;
+  }
+
+  .calendar-sheet_19{
+    order: 12;
+    margin-bottom: 10px;
+    margin-right: 10px;
+  }
+
+  .teaser{
+    display: none;
+  }
+
+  .main-content{
+
+    flex-direction: column;
+    align-content: center;
+    //height: 431px;
+    //max-height: 689px;
+    margin: 10px 20px 0;
+
+
+    .img{
+      //width: 80px;
+      //height: 53px;
+      width: calc((100% - 40px)/5);
+      padding-top: calc(((100% - 40px)/5)*0.6625);
+
+    }
+
+    //.img1{
+    //  .image_numeric(@image-pass_480, "sprite_480.png", 10px, 10px, 1, 0, 0);
+    //}
+    //.img2{
+    //  .image_numeric(@image-pass_480, "img_second_480.png", 10px, 10px, 8);
+    //}
+    //.img3{
+    //  .image_numeric(@image-pass_480, "sprite_480.png", 10px, 10px, 15, -180px, 0);
+    //}
+    //.img4{
+    //  .image_numeric(@image-pass_480, "image_vertical_adidas_480.png", 0, 32px, 22);
+    //  width: calc((100% - 40px)/2.5);
+    //  padding-top: calc(((100% - 40px)/2.5)* 1.375);
+    //  //width: 160px;
+    //  //height: 220px;
+    //  margin-left: 10px;
+    //}
+    //.img5{
+    //  .image_numeric(@image-pass_480, "sprite_480.png", 10px, 10px, 2, 0, -63px);
+    //}
+    //.img6{
+    //  .image_numeric(@image-pass_480, "sprite_480.png", 10px, 10px, 9, -90px, -63px);
+    //}
+    //.img7{
+    //  .image_numeric(@image-pass_480, "sprite_480.png", 10px, 10px, 16, -180px, -63px);
+    //}
+    //.img8{
+    //  .image_numeric(@image-pass_480, "sprite_480.png", 10px, 10px, 10, -90px, -126px);
+    //}
+    //.img9{
+    //  .image_numeric(@image-pass_480, "sprite_480.png", 10px, 10px, 17, -180px, -126px);
+    //}
+    //.img10{
+    //  .image_numeric(@image-pass_480, "sprite_480.png", 10px, 10px, 4, 0, -189px);
+    //}
+    //.img11{
+    //  .image_numeric(@image-pass_480, "sprite_480.png", 10px, 10px, 11, -90px, -189px);
+    //}
+    //.img12{
+    //  .image_numeric(@image-pass_480, "sprite_480.png", 10px, 10px, 18, -180px, -189px);
+    //}
+    //.img13{
+    //  .image_numeric(@image-pass_480, "sprite_480.png", 10px, 10px, 5, 0, -252px);
+    //}
+    //.img14{
+    //  .image_numeric(@image-pass_480, "sprite_480.png", 10px, 10px, 19, -180px, -252px);
+    //}
+    //.img15{
+    //  .image_numeric(@image-pass_480, "sprite_480.png", 10px, 10px, 23, -270px, -252px);
+    //}
+    //.img16{
+    //  margin-top: 252px;
+    //  margin-left: -80px;
+    //  .image_numeric(@image-pass_480, "sprite_480.png", 0, 10px, 26, -360px, -252px);
+    //}
+    //.img17{
+    //  .image_numeric(@image-pass_480, "sprite_480.png", 10px, 10px, 6, 0, -315px);
+    //}
+    //.img18{
+    //  .image_numeric(@image-pass_480, "sprite_480.png", 10px, 10px, 13, -90px, -315px);
+    //}
+    //.img19{
+    //  .image_numeric(@image-pass_480, "sprite_480.png", 10px, 10px, 20, -180px, -315px);
+    //}
+    //.img20{
+    //  margin-left: -80px;
+    //  .image_numeric(@image-pass_480, "sprite_480.png", 0, 10px, 27, -360px, -315px);
+    //}
+    //.img21{
+    //  .image_numeric(@image-pass_480, "sprite_480.png", 10px, 0, 7, 0, -378px);
+    //}
+    //.img22{
+    //  .image_numeric(@image-pass_480, "sprite_480.png", 10px, 0, 14, -90px, -378px);
+    //}
+    //.img23{
+    //  .image_numeric(@image-pass_480, "sprite_480.png", 10px, 0, 25, -270px, -378px);
+    //}
+    //
+    //.img24{
+    //  display:none;
+    //}
+
+    .img1{
+      .image_numeric(@image-pass_480, "sprite_480.png", 10px, 10px, 1, 0%, 0%);
+    }
+
+    .img3{
+      .image_numeric(@image-pass_480, "sprite_480.png", 10px, 10px, 15, 50%, 0%);
+    }
+
+    .img5{
+      .image_numeric(@image-pass_480, "sprite_480.png", 10px, 10px, 2, 0%, 16.67%);
+    }
+    .img6{
+      .image_numeric(@image-pass_480, "sprite_480.png", 10px, 10px, 9, 25%, 16.67%);
+    }
+    .img7{
+      .image_numeric(@image-pass_480, "sprite_480.png", 10px, 10px, 16, 50%, 16.67%);
+    }
+    .img8{
+      .image_numeric(@image-pass_480, "sprite_480.png", 10px, 10px, 10, 25%, 33.33%);
+    }
+    .img9{
+      .image_numeric(@image-pass_480, "sprite_480.png", 10px, 10px, 17, 50%, 33.33%);
+    }
+    .img10{
+      .image_numeric(@image-pass_480, "sprite_480.png", 10px, 10px, 4, 0%, 50%);
+    }
+    .img11{
+      .image_numeric(@image-pass_480, "sprite_480.png", 10px, 10px, 11, 25%, 50%);
+    }
+    .img12{
+      .image_numeric(@image-pass_480, "sprite_480.png", 10px, 10px, 18, 50%, 50%);
+    }
+    .img13{
+      .image_numeric(@image-pass_480, "sprite_480.png", 10px, 10px, 5, 0%, 66.67%);
+    }
+    .img14{
+      .image_numeric(@image-pass_480, "sprite_480.png", 10px, 10px, 19, 50%, 66.67%);
+    }
+    .img15{
+      .image_numeric(@image-pass_480, "sprite_480.png", 10px, 10px, 23, 75%, 66.67%);
+    }
+    .img16{
+      margin-top: 252px;
+      margin-left: -80px;
+      .image_numeric(@image-pass_480, "sprite_480.png", 0, 10px, 26, 100%, 66.67%);
+    }
+    .img17{
+      .image_numeric(@image-pass_480, "sprite_480.png", 10px, 10px, 6, 0%, 83.33%);
+    }
+    .img18{
+      .image_numeric(@image-pass_480, "sprite_480.png", 10px, 10px, 13, 25%, 83.33%);
+    }
+    .img19{
+      .image_numeric(@image-pass_480, "sprite_480.png", 10px, 10px, 20, 50%, 83.33%);
+    }
+    .img20{
+      margin-left: -80px;
+      .image_numeric(@image-pass_480, "sprite_480.png", 0, 10px, 27, 100%, 83.33%);
+    }
+    .img21{
+      .image_numeric(@image-pass_480, "sprite_480.png", 10px, 0, 7, 0%, 100%);
+    }
+    .img22{
+      .image_numeric(@image-pass_480, "sprite_480.png", 10px, 0, 14, 25%, 100%);
+    }
+    .img23{
+      .image_numeric(@image-pass_480, "sprite_480.png", 10px, 0, 25, 75%, 100%);
+    }
+
+    .img24{
+      display:none;
+    }
+
+    .img{
+      background-size: 550% 813.21%;
+    }
+
+    .img2{
+      .image_numeric(@image-pass_480, "img_second_480.png", 10px, 10px, 8);
+      background-size: cover;
+    }
+    .img4{
+      .image_numeric(@image-pass_480, "image_vertical_adidas_480.png", 0, 32px, 22);
+      width: calc((100% - 40px)/2.5);
+      padding-top: calc(((100% - 40px)/2.5)* 1.375);
+      //width: 160px;
+      //height: 220px;
+      margin-left: 10px;
+      background-size: cover;
+    }
+
+  }
+
+
+  .pages{
+    margin:  29px 0 28px 20px;
+    &__link{
+      margin-right: 10px;
+      &:last-child{
+        margin-right: 0;
+        margin-left: 15px;
+      }
+
+    }
+
+    &__text{
+      color:@light_pages_font;
+      margin-right: 25px;
+      align-self: center;
+    }
+
+  }
+
+}
+
+@media (min-width: 768px){
+  .container{
+    max-width: 768px;
+  }
+  .header{
+    margin: 40px 34px 25px 33px;
+
+    &__text{
+      font-size: 40px;
+      font-weight: 400;
+      padding-right: 16px;
+
+    }
+    &__line{
+      width: 54.7%;
+    }
+  }
+
+  .main-photo{
+    margin-right: 20px;
+    margin-left: 20px;
+    flex-direction: column;
+    align-items: center;
+    &-description{
+      padding-top:16px;
+      margin-left: -30px;
+      letter-spacing: .033em;
+      line-height: 1.2;
+      &__header{
+        font-family: @text_font;
+        font-size: 13px;
+        color: @text_color;
+        font-weight: 700;
+        line-height: 0.9;
+      }
+      &__link-author{
+        font-family: @text_font;
+        font-size: 13px;
+        font-weight: 400;
+        color: @light_text_font;
+        letter-spacing: normal;
+
+      }
+
+    }
+    &__img{
+      .image(@image-pass_768, "image_main.png");
+      width: 700px;
+      height: 455px;
+      overflow: hidden;
+      &_triangle{
+        .image(@image-pass_768, "triangle_for_main_photo_768.png");
+        width:54px;
+        height: 54px;
+        margin-left: 323px;
+        margin-top: 322px;
+      }
+    }
+  }
+
+  .calendar-sheet{
+    width: 160px;
+    height: 104px;
+
+    &__text{
+
+      margin-top: 25px;
+      margin-left: 39px;
+
+      width: 82px;
+      height: 55px;
+      font-size: 18px;
+      line-height: 24px;
+      &-number{
+        font-size: 36px;
+      }
+
+    }
+    &__img-arrow{
+      margin-left: 16px;
+      margin-top: 35px;
+    }
+  }
+
+  .calendar-sheet_21{
+    margin: 20px;
+  }
+
+  .calendar-sheet_18{
+    order: 13;
+    margin-bottom: 20px;
+    margin-right: 20px;
+  }
+  .calendar-sheet_17{
+    order: 15;
+    margin-bottom: 20px;
+    margin-right: 20px;
+  }
+
+  .calendar-sheet_20{
+    order: 10;
+    margin-bottom: 20px;
+    margin-right: 20px;
+  }
+
+  .calendar-sheet_19{
+    order: 4;
+    margin-bottom: 20px;
+    margin-right: 20px;
+  }
+
+  .teaser{
+    display: none;
+  }
+
+  .main-content{
+    flex-direction: column;
+
+    height: 972px;
+    margin: 18px 34px 0;
+    align-items: center;
+
+    .img{
+      width: 160px;
+      height: 104px;
+    }
+
+    .img1{
+      .image_numeric(@image-pass_768, "img1.png", 20px, 20px, 1);
+    }
+    .img2{
+      .image_numeric(@image-pass_768, "img2.png", 20px, 20px, 2);
+    }
+    .img3{
+      .image_numeric(@image-pass_768, "img3.png", 20px, 20px, 3);
+    }
+    .img4{
+      .image_numeric(@image-pass_768, "img4.png", 20px, 20px, 5);
+    }
+    .img5{
+      .image_numeric(@image-pass_768, "img5.png", 20px, 20px, 6);
+    }
+    .img6{
+      .image_numeric(@image-pass_768, "img6.png", 20px, 20px, 7);
+    }
+    .img7{
+      .image_numeric(@image-pass_768, "img7.png", 20px, 0,  8);
+    }
+    .img8{
+      .image_numeric(@image-pass_768, "img8.png", 20px, 20px, 9);
+    }
+    .img9{
+      .image_numeric(@image-pass_768, "img9.png", 20px, 20px, 11);
+    }
+    .img10{
+      .image_numeric(@image-pass_768, "img10.png", 20px, 20px, 12);
+    }
+    .img11{
+      .image_numeric(@image-pass_768, "img11.png", 20px, 20px, 14);
+    }
+    .img12{
+      .image_numeric(@image-pass_768, "img12.png", 20px, 0,  16);
+    }
+    .img13{
+      .image_numeric(@image-pass_768, "img13.png", 20px, 20px, 17);
+    }
+    .img14{
+      .image_numeric(@image-pass_768, "img14.png", 20px, 20px, 18);
+    }
+    .img15{
+      .image_numeric(@image-pass_768, "img15.png", 20px, 20px, 19);
+    }
+    .img16{
+      .image_numeric(@image-pass_768, "img16.png", 20px, 20px, 20);
+    }
+    .img17{
+      .image_numeric(@image-pass_768, "img17.png", 20px, 20px, 21);
+    }
+    .img18{
+      .image_numeric(@image-pass_768, "img18.png", 20px, 20px, 22);
+    }
+    .img19{
+      .image_numeric(@image-pass_768, "img19.png", 20px, 20px, 23);
+    }
+    .img20{
+      .image_numeric(@image-pass_768, "img_adidas_vertical_768.png", 0, 28px, 24);
+      height: 220px;
+    }
+    .img21{
+      .image_numeric(@image-pass_768, "img20.png", 0, 20px, 25);
+    }
+    .img22{
+      .image_numeric(@image-pass_768, "img21.png", 0, 20px, 26);
+    }
+    .img23{
+      .image_numeric(@image-pass_768, "img_cola_vertical_768.png", 0, 28px, 27);
+      height: 220px;
+    }
+
+    .img24{
+      .image_numeric(@image-pass_768, "img22.png", 0, 20px, 28);
+    }
+
+  }
+
+  .pages{
+    margin: 30px 0 33px 34px;
+    &__link{
+      margin-right: 10px;
+      &:last-child{
+        margin-right: 0;
+        margin-left: 15px;
+      }
+
+    }
+
+    &__text{
+      color:@light_pages_font;
+      margin-right: 25px;
+      align-self: center;
+    }
+
+  }
+
+}
+
+
